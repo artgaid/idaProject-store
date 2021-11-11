@@ -11,11 +11,11 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["normalize.css"],
+  css: ["normalize.css", "~assets/scss/colors.scss", "~assets/scss/font.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -27,7 +27,10 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ["@nuxtjs/style-resources"],
+  styleResources: {
+    scss: ["./assets/scss/*.scss"],
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

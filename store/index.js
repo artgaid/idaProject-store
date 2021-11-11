@@ -1,68 +1,19 @@
 export const state = () => ({
-  items: [
-    {
-      id: 0,
-      name: "item 1",
-      description:
-        "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-      photo:
-        "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
-      price: 10000,
-    },
-    {
-      id: 1,
-      name: "item 2",
-      description:
-        "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-      photo:
-        "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
-      price: 12000,
-    },
-    {
-      id: 2,
-      name: "item 3",
-      description:
-        "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-      photo:
-        "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
-      price: 11000,
-    },
-    {
-      id: 3,
-      name: "item 4",
-      description:
-        "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-      photo:
-        "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
-      price: 14000,
-    },
-    {
-      id: 4,
-      name: "item 5",
-      description:
-        "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-      photo:
-        "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
-      price: 16000,
-    },
-    {
-      id: 5,
-      name: "item 6",
-      description:
-        "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-      photo:
-        "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
-      price: 15000,
-    },
-  ],
+  items: [],
 });
 
 export const mutations = {
+  getStore(state, payload) {
+    state.items = payload;
+    localStorage.setItem("localItems", JSON.stringify(state.items));
+  },
   add(state, payload) {
-    return state.items.push({ id: state.items.length, ...payload });
+    state.items.push({ id: state.items.length, ...payload });
+    localStorage.setItem("localItems", JSON.stringify(state.items));
   },
   remove(state, payload) {
     state.items.splice(state.items.indexOf(payload), 1);
+    localStorage.setItem("localItems", JSON.stringify(state.items));
   },
   sortMin(state) {
     state.items.sort(function (a, b) {

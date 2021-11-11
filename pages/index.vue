@@ -1,5 +1,5 @@
 <template>
-  <div class="default-layout" style="display: flex">
+  <div class="default-layout">
     <div>
       <AddForm />
     </div>
@@ -9,6 +9,10 @@
   </div>
 </template>
 
-<script>
-export default {};
-</script>
+<style lang="scss">
+.default-layout {
+  display: flex;
+  margin: 30px;
+}
+</style>>
+

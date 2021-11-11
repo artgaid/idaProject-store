@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h3>Добавление товара</h3>
+  <div class="container">
     <form @submit="checkForm">
       <div>
         <label for="name">Наименование товара <span>*</span> </label>
+        <br />
         <input
           type="text"
           name="name"
@@ -14,8 +14,9 @@
         <p v-if="!name && errors">Поле является обязательным</p>
       </div>
 
-      <p>
+      <div>
         <label for="description">Описание товара</label>
+        <br />
         <textarea
           type="text"
           name="description"
@@ -23,10 +24,11 @@
           v-model="description"
           placeholder="Введите описание товара"
         ></textarea>
-      </p>
+      </div>
 
       <div>
         <label for="img">Ссылка на изображение товара <span>*</span></label>
+        <br />
         <input
           type="text"
           name="img"
@@ -39,6 +41,7 @@
 
       <div>
         <label for="price">Цена товара <span>*</span></label>
+        <br />
         <input
           type="number"
           name="price"
@@ -103,5 +106,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.container {
+  margin: 20px;
+  font-family: sans-serif;
+}
 </style>
