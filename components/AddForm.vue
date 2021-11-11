@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h3>Форма добавления</h3>
-    <form id="form" @submit="checkForm">
+    <h3>Добавление товара</h3>
+    <form @submit="checkForm">
       <div>
         <label for="name">Наименование товара <span>*</span> </label>
         <input
@@ -11,7 +11,7 @@
           v-model="name"
           placeholder="Введите наименование товара"
         />
-        <p v-if="errors === 'name'">Поле является обязательным</p>
+        <p v-if="!name && errors">Поле является обязательным</p>
       </div>
 
       <p>
@@ -34,7 +34,7 @@
           v-model="img"
           placeholder="Введите ссылку"
         />
-        <p v-if="errors === 'img'">Поле является обязательным</p>
+        <p v-if="!img && errors">Поле является обязательным</p>
       </div>
 
       <div>
@@ -47,12 +47,17 @@
           min="0"
           placeholder="Введите цену"
         />
-        <p v-if="errors === 'price'">Поле является обязательным</p>
+        <p v-if="!price && errors">Поле является обязательным</p>
       </div>
 
-      <p>
-        <input type="submit" value="Submit" />
-      </p>
+      <button
+        v-bind:disabled="getErrors || errors"
+        type="submit"
+        value="Submit"
+        @click="addItem()"
+      >
+        Добавить товар
+      </button>
     </form>
   </div>
 </template>
@@ -61,21 +66,38 @@
 export default {
   data() {
     return {
-      errors: null,
+      errors: false,
       name: null,
       description: null,
       img: null,
       price: null,
     };
   },
+  computed: {
+    getErrors: function (e) {
+      if (this.name && this.price && this.img) {
+        this.errors = false;
+      } else if (this.name || this.price || this.img) {
+        return false;
+      } else return true;
+    },
+  },
   methods: {
     checkForm: function (e) {
-      if (this.name && this.age) return true;
-      this.errors = [];
-      if (!this.name) this.errors = "name";
-      if (!this.price) this.errors = "price";
-      if (!this.img) this.errors = "img";
       e.preventDefault();
+      if (this.name && this.price) return true;
+      if (!this.name || !this.price || !this.img) this.errors = true;
+    },
+    addItem() {
+      const newItem = {
+        name: this.name,
+        description: this.description,
+        photo: this.img,
+        price: this.price,
+      };
+      if (this.name && this.price && this.img) {
+        this.$store.commit("add", newItem);
+      }
     },
   },
 };
