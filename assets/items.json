@@ -1,0 +1,47 @@
+{
+    "items": [
+        {
+            "id": 1 ,
+            "name": "item 1", 
+            "description": "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+            "photo":"https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+            "price": "10 000"
+        },
+        {
+            "id": 2 ,
+            "name": "item 2" ,
+            "description" :"Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+            "photo":"https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+            "price": "12 000"
+        },
+        {
+            "id": 3 ,
+            "name": "item 3" ,
+            "description": "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+            "photo":"https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+            "price": "11 000"
+        },
+        {
+            "id": 4 ,
+            "name": "item 4" ,
+            "description": "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+            "photo":"https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+            "price": "14 000"
+        },
+        {
+            "id": 5 ,
+            "name" : "item 5" ,
+            "description": "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+            "photo":"https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg", 
+            "price": "16 000"
+
+        },
+        {
+            "id": 6 ,
+            "name" : "item 6" ,
+            "description": "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+            "photo":"https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+            "price": "15 000"
+        }
+    ]
+}
