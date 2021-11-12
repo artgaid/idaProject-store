@@ -192,4 +192,19 @@ button:hover {
     0px 6px 10px rgba(0, 0, 0, 0.02);
   border-radius: 4px;
 }
+
+@media (max-width: 375px) {
+  .container {
+    position: relative;
+  }
+
+  input,
+  textarea {
+    font-size: 10px;
+    line-height: 10px;
+  }
+  ::placeholder {
+    font-size: 7px;
+  }
+}
 </style>

@@ -11,11 +11,16 @@
           {{ option.text }}
         </option>
       </select>
-      <div class="card-list">
-        <div v-for="item in sortItems" :key="item.id">
+      <transition-group name="card-list" tag="div" class="card-list">
+        <div
+          name="bounce"
+          class="item"
+          v-for="item in sortItems"
+          :key="item.id"
+        >
           <ItemCard :item="item" />
         </div>
-      </div>
+      </transition-group>
     </div>
     <div :class="{ preloader: preLoader }">
       <div>
@@ -126,6 +131,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .preloader div {
   width: 100px;
   height: 100px;
@@ -149,8 +172,6 @@ export default {
 }
 
 .container {
-  width: 100%;
-  height: 100%;
   text-align: right;
 }
 select {
@@ -174,6 +195,58 @@ select {
   grid-gap: 15px;
   justify-items: center;
   text-align: left;
+}
+
+.item:nth-child(3n) {
+  margin-right: 0;
+}
+.item:nth-child(27n) {
+  margin-bottom: 0;
+}
+.card-list-move {
+  transition: transform 1s;
+}
+
+.card-list-enter-active,
+.card-list-leave-active {
+  transition: all 1s;
+}
+.card-list-enter, .card-list-leave-to /* .list-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@media (max-width: 1024px) {
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+    text-align: left;
+  }
+
+  select {
+    width: 20%;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .card-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+    justify-items: center;
+    text-align: left;
+  }
+
+  select {
+    width: 30%;
+    padding: 2px;
+    margin-bottom: 5px;
+    font-size: 10px;
+  }
 }
 </style>
 

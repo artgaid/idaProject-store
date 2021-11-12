@@ -79,4 +79,24 @@ export default {
     line-height: 30px;
   }
 }
+
+@media (max-width: 1024px) {
+  .delete {
+    top: -5px;
+    left: 290px;
+  }
+}
+@media (max-width: 768px) {
+  .delete {
+    top: 0px;
+    left: 320px;
+  }
+}
+
+@media (max-width: 375px) {
+  .delete {
+    top: 0px;
+    left: 290px;
+  }
+}
 </style>
