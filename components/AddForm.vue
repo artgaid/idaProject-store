@@ -2,7 +2,9 @@
   <div class="container">
     <form @submit="checkForm">
       <div>
-        <label for="name">Наименование товара <span>*</span> </label>
+        <label for="name" class="text"
+          >Наименование товара <span class="error">*</span>
+        </label>
         <br />
         <input
           type="text"
@@ -11,11 +13,11 @@
           v-model="name"
           placeholder="Введите наименование товара"
         />
-        <p v-if="!name && errors">Поле является обязательным</p>
+        <p v-if="!name && errors" class="error">Поле является обязательным</p>
       </div>
 
       <div>
-        <label for="description">Описание товара</label>
+        <label for="description" class="text">Описание товара</label>
         <br />
         <textarea
           type="text"
@@ -27,7 +29,9 @@
       </div>
 
       <div>
-        <label for="img">Ссылка на изображение товара <span>*</span></label>
+        <label for="img" class="text"
+          >Ссылка на изображение товара <span class="error">*</span></label
+        >
         <br />
         <input
           type="text"
@@ -36,11 +40,13 @@
           v-model="img"
           placeholder="Введите ссылку"
         />
-        <p v-if="!img && errors">Поле является обязательным</p>
+        <p v-if="!img && errors" class="error">Поле является обязательным</p>
       </div>
 
       <div>
-        <label for="price">Цена товара <span>*</span></label>
+        <label for="price" class="text"
+          >Цена товара <span class="error">*</span></label
+        >
         <br />
         <input
           type="number"
@@ -50,7 +56,7 @@
           min="0"
           placeholder="Введите цену"
         />
-        <p v-if="!price && errors">Поле является обязательным</p>
+        <p v-if="!price && errors" class="error">Поле является обязательным</p>
       </div>
 
       <button
@@ -107,8 +113,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+input,
+textarea {
+  margin: 5px 0 15px;
+  padding: 10px 16px;
+  border: 0px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 15px;
+  width: 90%;
+  outline: none;
+}
+::placeholder {
+  color: $grey;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 0px;
+  width: 100%;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: $green;
+  color: $white;
+  outline: none;
+}
+
+button[disabled="disabled"] {
+  color: $grey;
+  background-color: #eeeeee;
+}
+
+.text {
+  font-size: 10px;
+  line-height: 13px;
+}
+.error {
+  margin: 4px 0;
+  color: $red;
+  font-size: 8px;
+  line-height: 10px;
+}
 .container {
-  margin: 20px;
-  font-family: sans-serif;
+  padding: 20px;
+  background-color: $white;
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
+    0px 6px 10px rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
 }
 </style>

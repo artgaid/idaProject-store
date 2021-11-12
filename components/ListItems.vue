@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <select v-model="sort">
       <option disabled value="">По умолчанию</option>
       <option
@@ -10,9 +10,8 @@
         {{ option.text }}
       </option>
     </select>
-    <span>Выбрано: {{ sort }}</span>
-    <div v-for="item in sortItems" :key="item.id">
-      <div class="card">
+    <div class="card-list">
+      <div v-for="item in sortItems" :key="item.id">
         <ItemCard :item="item" />
       </div>
     </div>
@@ -112,4 +111,31 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+  text-align: right;
+}
+select {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 0;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  color: $grey;
+  font-size: 12px;
+  appearance: none;
+  background: url("/svg/arrow.svg") no-repeat right $white;
+  background-position-x: calc(100% - 15px);
+  outline: none;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+  justify-items: center;
+  text-align: left;
+}
+</style>
 
