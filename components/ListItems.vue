@@ -1,18 +1,31 @@
 <template>
-  <div class="container">
-    <select v-model="sort">
-      <option disabled value="">По умолчанию</option>
-      <option
-        v-for="option in sortOptions"
-        :value="option.value"
-        :key="option.value"
-      >
-        {{ option.text }}
-      </option>
-    </select>
-    <div class="card-list">
-      <div v-for="item in sortItems" :key="item.id">
-        <ItemCard :item="item" />
+  <div>
+    <div class="container" :class="{ display: preLoader }">
+      <select v-model="sort">
+        <option disabled value="">По умолчанию</option>
+        <option
+          v-for="option in sortOptions"
+          :value="option.value"
+          :key="option.value"
+        >
+          {{ option.text }}
+        </option>
+      </select>
+      <div class="card-list">
+        <div v-for="item in sortItems" :key="item.id">
+          <ItemCard :item="item" />
+        </div>
+      </div>
+    </div>
+    <div :class="{ preloader: preLoader }">
+      <div>
+        <div>
+          <div>
+            <div>
+              <div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,7 +35,7 @@
 export default {
   data() {
     return {
-      items: this.$store.state.items,
+      preLoader: true,
       sort: "",
       sortOptions: [
         { text: "По цене min", value: "min" },
@@ -35,8 +48,7 @@ export default {
           name: "item 1",
           description:
             "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          photo:
-            "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+          photo: "/img/photo.png",
           price: 10000,
         },
         {
@@ -44,8 +56,7 @@ export default {
           name: "item 2",
           description:
             "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          photo:
-            "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+          photo: "/img/photo.png",
           price: 12000,
         },
         {
@@ -53,8 +64,7 @@ export default {
           name: "item 3",
           description:
             "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          photo:
-            "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+          photo: "/img/photo.png",
           price: 11000,
         },
         {
@@ -62,8 +72,7 @@ export default {
           name: "item 4",
           description:
             "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          photo:
-            "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+          photo: "/img/photo.png",
           price: 14000,
         },
         {
@@ -71,8 +80,7 @@ export default {
           name: "item 5",
           description:
             "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          photo:
-            "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+          photo: "/img/photo.png",
           price: 16000,
         },
         {
@@ -80,8 +88,7 @@ export default {
           name: "item 6",
           description:
             "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          photo:
-            "https://www.zenit.photo/upload/resize_cache/iblock/092/670_558_1/fotoapparat_zenit_m_silver_zenitar_1_35_1.jpg",
+          photo: "/img/photo.png",
           price: 15000,
         },
       ],
@@ -98,25 +105,56 @@ export default {
   mounted() {
     if (!process.client) return;
     const savedData = localStorage.getItem("localItems");
-    if (savedData) {
-      try {
-        const savedDateObj = JSON.parse(savedData);
-        this.$store.commit("getStore", savedDateObj);
-      } catch (e) {
-        console.log("Error : " + e);
+
+    // исскуственная задержка, для отоброжения preLoader.
+    const timer = setTimeout(() => {
+      if (savedData) {
+        try {
+          const savedDateObj = JSON.parse(savedData);
+          this.$store.commit("getStore", savedDateObj);
+        } catch (e) {
+          console.log("Error : " + e);
+        }
+      } else {
+        this.$store.commit("getStore", this.itemsDate);
       }
-    } else {
-      this.$store.commit("getStore", this.itemsDate);
-    }
+      this.preLoader = false;
+      clearTimeout(timer);
+    }, 3000);
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.preloader div {
+  width: 100px;
+  height: 100px;
+  margin: 10% auto;
+  border: 14px inset #fff;
+  border-radius: 100%;
+  padding: 4px;
+  animation: preloader-spin 15s linear infinite;
+}
+@keyframes preloader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.display {
+  display: none;
+}
+
 .container {
+  width: 100%;
+  height: 100%;
   text-align: right;
 }
 select {
+  width: 15%;
   padding: 10px;
   margin-bottom: 20px;
   border: 0;

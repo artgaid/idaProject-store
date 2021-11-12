@@ -7,6 +7,7 @@
         </label>
         <br />
         <input
+          :class="{ error__border: !name && errors }"
           type="text"
           name="name"
           id="name"
@@ -16,7 +17,7 @@
         <p v-if="!name && errors" class="error">Поле является обязательным</p>
       </div>
 
-      <div>
+      <div class="margin">
         <label for="description" class="text">Описание товара</label>
         <br />
         <textarea
@@ -28,12 +29,13 @@
         ></textarea>
       </div>
 
-      <div>
+      <div class="margin">
         <label for="img" class="text"
           >Ссылка на изображение товара <span class="error">*</span></label
         >
         <br />
         <input
+          :class="{ error__border: !img && errors }"
           type="text"
           name="img"
           id="img"
@@ -43,12 +45,13 @@
         <p v-if="!img && errors" class="error">Поле является обязательным</p>
       </div>
 
-      <div>
+      <div class="margin">
         <label for="price" class="text"
           >Цена товара <span class="error">*</span></label
         >
         <br />
         <input
+          :class="{ error__border: !price && errors }"
           type="number"
           name="price"
           id="price"
@@ -105,6 +108,10 @@ export default {
         price: this.price,
       };
       if (this.name && this.price && this.img) {
+        this.name = null;
+        this.description = null;
+        this.img = null;
+        this.price = null;
         this.$store.commit("add", newItem);
       }
     },
@@ -115,7 +122,7 @@ export default {
 <style lang="scss" scoped>
 input,
 textarea {
-  margin: 5px 0 15px;
+  margin: 5px 0;
   padding: 10px 16px;
   border: 0px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -140,11 +147,26 @@ button {
   background-color: $green;
   color: $white;
   outline: none;
+  cursor: pointer;
 }
 
 button[disabled="disabled"] {
   color: $grey;
   background-color: #eeeeee;
+  box-shadow: none;
+  cursor: auto;
+}
+
+button[disabled="disabled"]:hover {
+  box-shadow: none;
+}
+
+button:hover {
+  box-shadow: 0px 2px 5px $black;
+}
+
+.margin {
+  margin: 15px 0;
 }
 
 .text {
@@ -157,7 +179,13 @@ button[disabled="disabled"] {
   font-size: 8px;
   line-height: 10px;
 }
+.error__border {
+  border: 1px solid $red;
+}
+
 .container {
+  position: sticky;
+  top: 10px;
   padding: 20px;
   background-color: $white;
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
